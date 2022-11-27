@@ -1,0 +1,22 @@
+#%RAML 1.0
+title: traits-example
+baseUri: /localhost:8082
+
+traits:
+  errorMessage: !include datatypes/trait.raml
+  client-id:
+    headers:
+      client_id:
+        required: true
+        type: string
+      client_secret:
+        required: true
+        type: string
+
+types:
+  accounts_pay: !include datatypes/accounts_payableDataType.raml
+
+/account-receivable:
+  get:
+    description: the method will calll accounts payable data
+    is: [client-id, errorMessage]
